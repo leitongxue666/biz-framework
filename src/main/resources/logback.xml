@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">　　　　　
+        <encoder>　　　　　　　
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%10.10thread] %-40.40logger{39}:%line: %msg%n</pattern>　　　　
+        </encoder>
+    </appender>
+
+    <appender name="WEB_STDOUT" class="ch.qos.logback.core.ConsoleAppender">　　　　　
+        <encoder>　　　　　　　
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%10.10thread] %-40.40logger{39}:%line: %X{REQUEST_ID} %msg%n</pattern>　　　　
+        </encoder>
+    </appender>
+
+    <!--输出到debug-->
+    <appender name="FILE_DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/logback-debug-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <append>true</append>
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%20.20thread] %-40.40logger{39}:%line: %msg%n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <!--<filter class="ch.qos.logback.classic.filter.LevelFilter">&lt;!&ndash; 只打印DEBUG日志 &ndash;&gt;-->
+            <!--<level>DEBUG</level>-->
+            <!--<onMatch>ACCEPT</onMatch>-->
+            <!--<onMismatch>DENY</onMismatch>-->
+        <!--</filter>-->
+    </appender>
+
+<!--    <logger name="com.example.web.controller" additivity="false">-->
+<!--        <appender-ref ref="WEB_STDOUT"/>　-->
+<!--    </logger>-->
+
+    <root level="INFO">　　　　
+        <appender-ref ref="WEB_STDOUT"/>　　
+    </root>
+</configuration>
